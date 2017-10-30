@@ -95,8 +95,11 @@ public class UnitMovementManager implements Updateable {
 		//velocity.scale(FRICTION);
 		velocity.add(steeringForce);
 		velocity.scale(FRICTION);
-		if(velocity.length() < CUT_OFF_VELOCITY) velocity.set(0, 0);
+		//if(velocity.length() < CUT_OFF_VELOCITY) velocity.set(0, 0);
 		host.getPosition().add(velocity);
+		
+		//reset steering
+		steeringForce.set(0, 0);
 	}
 	
 }
