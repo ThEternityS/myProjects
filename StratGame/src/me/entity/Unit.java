@@ -9,7 +9,7 @@ public class Unit implements Updateable, Displayable, Alive {
 
 	private Vector2D position;
 	
-	private UnitMovementManager myMovementManager;
+	private UnitMovementComponent myMovementManager;
 	private int health;
 	
 	private Vector2D destination;
@@ -21,7 +21,7 @@ public class Unit implements Updateable, Displayable, Alive {
 	}
 	
 	public Unit(UnitManager um, int x, int y) {
-		myMovementManager = new UnitMovementManager(um, this);
+		myMovementManager = new UnitMovementComponent(um, this);
 		position = new Vector2D(x, y);
 		destination = new Vector2D(position);
 	}

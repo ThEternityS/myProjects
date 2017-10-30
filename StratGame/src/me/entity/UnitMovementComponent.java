@@ -5,7 +5,7 @@ import java.util.Set;
 import me.main.managers.UnitManager;
 import me.util.Vector2D;
 
-public class UnitMovementManager implements Updateable {
+public class UnitMovementComponent implements Updateable {
 
 	private static final double FRICTION = 0.8;
 	private static final double MAX_FORCE = 0.5;
@@ -21,7 +21,7 @@ public class UnitMovementManager implements Updateable {
 	private Vector2D velocity;
 	private Vector2D steeringForce;
 
-	public UnitMovementManager(UnitManager p_manager, Unit p_host) {
+	public UnitMovementComponent(UnitManager p_manager, Unit p_host) {
 		this.myUnitManager = p_manager;
 		this.host = p_host;
 		velocity = new Vector2D(0, 0);
