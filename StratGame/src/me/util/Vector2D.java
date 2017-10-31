@@ -36,14 +36,27 @@ public class Vector2D {
 		this.y += y;
 	}
 	
+	/**
+	 * scales the x value of the vector
+	 * @param factorX to scale by
+	 */
 	public void scaleX(double factorX) {
 		this.x *= factorX;
 	}
 	
+	/**
+	 * scales the y value of the vector
+	 * @param factorY to scale by
+	 */
 	public void scaleY(double factorY) {
 		this.y *= factorY;
 	}
 	
+	
+	/**
+	 * scales the length of the vector
+	 * @param factor to scale by
+	 */
 	public void scale(double factor) {
 		scaleX(factor);
 		scaleY(factor);
