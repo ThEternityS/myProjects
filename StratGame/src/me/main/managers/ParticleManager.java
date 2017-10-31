@@ -20,7 +20,7 @@ public class ParticleManager {
 		if(allParticles.size() == 0) {
 			System.out.println("new Explosion");
 			//addExplosion(new Vector2D(100, 100), 250, 0.6);
-			addImpact(new Vector2D(100, 100), 250, 4, new Vector2D(10, 1));
+			addImpact(new Vector2D(100, 100), 250, 3, 1, new Vector2D(10, 1));
 		}
 		
 		List<Particle> _dead = new LinkedList<Particle>();
@@ -62,12 +62,25 @@ public class ParticleManager {
 		}
 	}
 	
-	public void addImpact(Vector2D origin, int density, double force, Vector2D direction) {
+	public void addImpact(Vector2D origin, int density, double force, double spread, Vector2D direction) {
+		createCone(origin, (int) (2 * density / 3), force, spread, direction);
+		
+		Vector2D smallConeDir = new Vector2D(direction);
+		smallConeDir.scale(-1);
+		System.out.println(direction);
+		System.out.println(smallConeDir);
+		
+		createCone(origin, (int) (density  / 3), force / 100, spread, smallConeDir);
+		
+	}
+	
+	private void createCone(Vector2D origin, int density, double force, double spread, Vector2D direction) {
 		for(int i = 0; i < density; i++) {
 			Vector2D _vel = new Vector2D(direction);
-			_vel.scaleX(Math.random());
-			_vel.scaleY(Math.random());
-			_vel.scaleTo(force*Math.random());
+			_vel.scaleTo(force);
+			_vel.add(new Vector2D((Math.random() - 0.5) * spread, (Math.random() - 0.5) * spread));
+			_vel.scale(Math.random());
+			
 			allParticles.add(new Particle(origin, _vel, Color.CYAN, (int)(Math.random() * 300)));
 		}
 	}
