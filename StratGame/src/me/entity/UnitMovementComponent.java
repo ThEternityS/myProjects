@@ -11,9 +11,10 @@ public class UnitMovementComponent implements Updateable {
 	private static final double MAX_FORCE = 0.5;
 	private static final double CUT_OFF_VELOCITY = 0.1;
 	
-	private static final double SLOWING_DISTANCE = 25;
+	private static final double SLOWING_DISTANCE = 80;
 	
 	private static final int SPACING_DISTANCE = 25;
+	private static final int LEEWAY_DISTANCE = 1;
 	
 	private UnitManager myUnitManager;
 	private Unit host;
@@ -34,18 +35,16 @@ public class UnitMovementComponent implements Updateable {
 	 */
 	public void moveTo(Vector2D target) {
 		Vector2D directionForce = calcDistance(target);
-		directionForce.truncate(MAX_FORCE);
+		double distance = directionForce.length();
+		
+		if(distance < LEEWAY_DISTANCE) return;
+		
+		directionForce.scaleTo(MAX_FORCE);
+		if(distance < SLOWING_DISTANCE) {
+			directionForce.scale(distance / SLOWING_DISTANCE);
+		}
+
 		steeringForce.add(directionForce);
-		approch(target);
-	}
-	
-	/**
-	 * slows the host when approaching the target
-	 * @param p_target which will slow the host
-	 */
-	public void approch(Vector2D target) {
-		if(calcDistance(target).length() > SLOWING_DISTANCE) return;
-		steeringForce.scale(0.1);
 	}
 	
 	/**
@@ -67,8 +66,11 @@ public class UnitMovementComponent implements Updateable {
 	
 	private Vector2D calcAvoidUnitForce(Unit unit) {
 		Vector2D avoidUnitForce = calcDistance(unit.getPosition());
+		double distance = avoidUnitForce.length();
+		
 		avoidUnitForce.scale(-1);
 		avoidUnitForce.truncate(MAX_FORCE);
+		if(distance < SPACING_DISTANCE) avoidUnitForce.scale(SPACING_DISTANCE / (SPACING_DISTANCE - distance));
 		return avoidUnitForce;
 	}
 	
@@ -95,7 +97,7 @@ public class UnitMovementComponent implements Updateable {
 		//velocity.scale(FRICTION);
 		velocity.add(steeringForce);
 		velocity.scale(FRICTION);
-		if(velocity.length() < CUT_OFF_VELOCITY) velocity.set(0, 0);
+		//if(velocity.length() < CUT_OFF_VELOCITY) velocity.set(0, 0);
 		host.getPosition().add(velocity);
 		
 		//reset steering
