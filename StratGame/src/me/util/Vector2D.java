@@ -36,9 +36,17 @@ public class Vector2D {
 		this.y += y;
 	}
 	
+	public void scaleX(double factorX) {
+		this.x *= factorX;
+	}
+	
+	public void scaleY(double factorY) {
+		this.y *= factorY;
+	}
+	
 	public void scale(double factor) {
-		this.x *= factor;
-		this.y *= factor;
+		scaleX(factor);
+		scaleY(factor);
 	}
 	
 	public void scaleTo(double p_targetLength) {

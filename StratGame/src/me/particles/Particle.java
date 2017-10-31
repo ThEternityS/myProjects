@@ -27,7 +27,7 @@ public class Particle implements Alive, Updateable {
 	}
 	@Override
 	public void update() {
-		velocity.scale(0.99);
+		velocity.scale(0.95);
 		if(velocity.length() < 0.1) velocity.set(0, 0);
 		position.add(velocity);
 		ttl--;
