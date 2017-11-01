@@ -1,37 +1,58 @@
 package me.entity;
 
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 import me.util.Vector2D;
 
 public class UnitSquad {
 	
-	private static final int UNIT_OFFSET = 25;
+	private static final int UNIT_OFFSET = 55;
 	
-	Collection<Unit> squadMembers;
+	private Unit leader;
+	private List<Unit> squadMembers;
 	
-	public UnitSquad(Collection<Unit> squadMembers) {
-		this.squadMembers = squadMembers;
+	public UnitSquad(Collection<Unit> squadUnits) {
+		this.squadMembers = new LinkedList<Unit>();
+		this.squadMembers.addAll(squadUnits);
+		this.leader = null;
 	}
 	
-	public void moveTo(Vector2D destination) {
-		//calculate average squad location
-		Vector2D average = new Vector2D(0, 0);
-		for(Unit $u: squadMembers) {
-			average.add($u.getPosition());
+	public void moveStraightTo(Vector2D destination) {
+		calcLeader(destination);
+		
+		//arrange units around squad leader
+		Vector2D movingDirection = Vector2D.diffrence(destination, leader.getPosition());
+		Vector2D offset = Vector2D.orthogonal(movingDirection);
+		offset.scaleTo(UNIT_OFFSET);
+		
+		
+		//initiate movement
+		leader.moveTo(destination);
+		
+		for(int i = 0; i < squadMembers.size(); i++) {
+			Unit $u = squadMembers.get(i);
+			Vector2D target = Vector2D.sum(destination, Vector2D.product(offset, i % 2 == 0 ? i + 1 : -i - 1));
+			System.out.println("hallo" + target);
+			$u.moveTo(target);
 		}
-		average.scale(1 / squadMembers.size());
+	}
+	
+	private void calcLeader(Vector2D destination) {
+		double leaderDistance = Double.MAX_VALUE;
+
+		if(leader != null) squadMembers.add(leader);
 		
-		System.out.println(average);
-		
-		Vector2D offsetPerUnit = Vector2D.orthogonal(Vector2D.diffrence(destination, average));
-		offsetPerUnit.scaleTo(UNIT_OFFSET);
-		System.out.println(offsetPerUnit);
-		
-		Vector2D offset = new Vector2D(0, 0);
+		//get closest member to destination
 		for(Unit $u: squadMembers) {
-			$u.moveTo(Vector2D.sum(destination, offset));
-			offset.add(offsetPerUnit);
+			Vector2D dis = Vector2D.diffrence($u.getPosition(), destination);
+			if(dis.length() < leaderDistance) {
+				leaderDistance = dis.length();
+				leader = $u;
+			}
 		}
+		
+		if(leaderDistance != Double.MAX_VALUE) squadMembers.remove(leader);
 	}
 }

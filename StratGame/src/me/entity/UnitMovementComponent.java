@@ -9,11 +9,10 @@ public class UnitMovementComponent implements Updateable {
 
 	private static final double FRICTION = 0.8;
 	private static final double MAX_FORCE = 0.5;
-	private static final double CUT_OFF_VELOCITY = 0.1;
 	
 	private static final double SLOWING_DISTANCE = 80;
 	
-	private static final int SPACING_DISTANCE = 25;
+	private static final int SPACING_DISTANCE = 20;
 	private static final int LEEWAY_DISTANCE = 1;
 	
 	private UnitManager myUnitManager;
@@ -70,7 +69,6 @@ public class UnitMovementComponent implements Updateable {
 		
 		avoidUnitForce.scale(-1);
 		avoidUnitForce.truncate(MAX_FORCE);
-		if(distance < SPACING_DISTANCE) avoidUnitForce.scale(SPACING_DISTANCE / (SPACING_DISTANCE - distance));
 		return avoidUnitForce;
 	}
 	

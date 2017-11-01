@@ -8,6 +8,7 @@ import java.util.Set;
 import me.entity.Entity;
 import me.entity.QuadTree;
 import me.entity.Unit;
+import me.entity.UnitSquad;
 import me.util.Vector2D;
 
 public class UnitManager {
@@ -33,29 +34,8 @@ public class UnitManager {
 	}
 	
 	public void moveSelected(Vector2D destination) {
-		/*
-		for(Unit $u: selectedUnits) {
-			$u.moveTo(p_destination);
-		}
-		*/
-		Vector2D average = new Vector2D(0, 0);
-		for(Unit $u: selectedUnits) {
-			average.add($u.getPosition());
-		}
-		average.scale(1 / selectedUnits.size());
-		
-		System.out.println(average);
-		
-		Vector2D offsetPerUnit = Vector2D.orthogonal(Vector2D.diffrence(destination, average));
-		offsetPerUnit.scaleTo(50);
-		
-		//offsetPerUnit.set(50, 0);
-		
-		Vector2D offset = new Vector2D(0, 0);
-		for(Unit $u: selectedUnits) {
-			$u.moveTo(Vector2D.sum(destination, offset));
-			offset.add(offsetPerUnit);
-		}
+		UnitSquad squad = new UnitSquad(selectedUnits);
+		squad.moveStraightTo(destination);
 	}
 	
 	public void setSelectedUnits(Collection<Unit> p_selection) {

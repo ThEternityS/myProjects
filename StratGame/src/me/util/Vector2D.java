@@ -122,6 +122,10 @@ public class Vector2D {
 		return new Vector2D(subtrahend.getX() - minuend.getX(), subtrahend.getY() - minuend.getY());
 	}
 	
+	public static Vector2D product(Vector2D base, double factor) {
+		return new Vector2D(base.getX() * factor, base.getY() * factor);
+	}
+	
 	public static Vector2D orthogonal(Vector2D v) {
 		return new Vector2D(v.getX(), -v.getY());
 	}
