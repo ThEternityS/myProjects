@@ -23,8 +23,8 @@ public class UnitSquad {
 		calcLeader(destination);
 		
 		//arrange units around squad leader
-		Vector2D movingDirection = Vector2D.diffrence(destination, leader.getPosition());
-		Vector2D offset = Vector2D.orthogonal(movingDirection);
+		Vector2D offset = Vector2D.diffrence(destination, leader.getPosition());
+		//offset = 
 		offset.scaleTo(UNIT_OFFSET);
 		
 		
@@ -33,7 +33,8 @@ public class UnitSquad {
 		
 		for(int i = 0; i < squadMembers.size(); i++) {
 			Unit $u = squadMembers.get(i);
-			Vector2D target = Vector2D.sum(destination, Vector2D.product(offset, i % 2 == 0 ? i + 1 : -i - 1));
+			Vector2D target = Vector2D.sum(destination, Vector2D.product(offset, i + 1));
+			
 			System.out.println("hallo" + target);
 			$u.moveTo(target);
 		}
