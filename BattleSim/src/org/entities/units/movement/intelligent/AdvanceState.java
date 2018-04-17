@@ -5,7 +5,7 @@ public class AdvanceState implements MovementState {
 	private int i;
 	
 	public AdvanceState() {
-		i = 100;
+		i = 300;
 	}
 	
 	@Override

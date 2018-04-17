@@ -11,7 +11,7 @@ public class LaserShooter implements ShootingModule {
 	private TargetAquisition myTargeting;
 	
 	private Collideable target;
-	private int targetAquisitionTime = 10;
+	private int targetAquisitionTime = 1;
 	private int aquisitionTimer;
 	
 	public LaserShooter(Unit host) {
@@ -27,7 +27,7 @@ public class LaserShooter implements ShootingModule {
 		//target stayed the same
 		if(c != null && target == c) {
 			aquisitionTimer--;
-			if(aquisitionTimer == 0) {
+			if(aquisitionTimer <= 0) {
 				
 				//shoot here
 				EffectInitiator.getInstance().createLineEffect(myHost.getX() + myHost.getRadius(), myHost.getY() + myHost.getRadius(), target.getX() + target.getRadius(), target.getY() + target.getRadius());

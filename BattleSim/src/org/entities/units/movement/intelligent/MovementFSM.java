@@ -11,9 +11,6 @@ public class MovementFSM {
 	public MovementFSM(IntelligentMovement host) {
 		this.myHost = host;
 		myStates = new LinkedList<MovementState>();
-		
-		this.pushState(new DropState());
-		this.pushState(new AdvanceState());
 	}
 	
 	public void execute() {
@@ -27,7 +24,15 @@ public class MovementFSM {
 	public void popState() {
 		myStates.remove(0);
 	}
-	public void pushState(MovementState ms) {
+	private void pushState(MovementState ms) {
 		myStates.add(0, ms);
+	}
+	
+	public void pushDropState() {
+		pushState(new DropState());
+	}
+	
+	public void pushAdvanceState() {
+		pushState(new AdvanceState());
 	}
 }

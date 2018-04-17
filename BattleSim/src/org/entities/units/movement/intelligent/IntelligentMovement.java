@@ -15,15 +15,18 @@ public class IntelligentMovement implements MovementModule {
 	private Unit myHost;
 	private MovementFSM myFSM;
 	
-	private double maxForce = 0.8;
+	private double maxForce = 0.4;
 		
 	private Vector2D velocity;
 	private Vector2D force;
 
 	
-	public IntelligentMovement(Unit host) {
+	public IntelligentMovement(Unit host, MovementFSMPrimer movementPrimer) {
 		myHost = host;
+		
 		myFSM = new MovementFSM(this);
+		movementPrimer.primeMovementFSM(myFSM);
+		
 		velocity = new Vector2D();
 		force = new Vector2D(); 
 	}
