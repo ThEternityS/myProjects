@@ -25,6 +25,7 @@ public class IssueCommandState extends GameState{
 		if(km.readRightButtonClick()) {
 			Vector2D _dest = dm.convertToGlobal(km.getMousePositionRelativeToComponent());
 			om.addMovePing(_dest);
+			om.addConnectionLine(um.getLeader(_dest).getPosition(), _dest);
 			
 
 

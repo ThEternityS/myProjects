@@ -34,8 +34,25 @@ public class UnitManager {
 	}
 	
 	public void moveSelected(Vector2D destination) {
-		UnitSquad squad = new UnitSquad(selectedUnits);
+		
+		
+		//if(leaderDistance != Double.MAX_VALUE) selectedUnits.remove(leader);
+		
+		UnitSquad squad = new UnitSquad(getLeader(destination), selectedUnits);
 		squad.moveStraightTo(destination);
+	}
+	
+	public Unit getLeader(Vector2D destination) {
+		Unit leader = null;
+		double leaderDistance = Double.MAX_VALUE;
+		for(Unit $u: selectedUnits) {
+			Vector2D dis = Vector2D.diffrence($u.getPosition(), destination);
+			if(dis.length() < leaderDistance) {
+				leaderDistance = dis.length();
+				leader = $u;
+			}
+		}
+		return leader;
 	}
 	
 	public void setSelectedUnits(Collection<Unit> p_selection) {

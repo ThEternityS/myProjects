@@ -6,6 +6,7 @@ import me.entity.Alive;
 import me.entity.Displayable;
 import me.entity.Entity;
 import me.entity.Updateable;
+import me.entity.overlayentity.ConnectionLine;
 import me.entity.overlayentity.CustomBound;
 import me.entity.overlayentity.MovePing;
 import me.entity.overlayentity.SelectionBox;
@@ -137,5 +138,9 @@ public class OverlayManager {
 		addAll(new CustomBound(0, 0, w, 5));
 		addAll(new CustomBound(w - 5, 0, 5, h));
 		addAll(new CustomBound(0, h - 5, w, 5));
+	}
+	
+	public void addConnectionLine(Vector2D start, Vector2D end) {
+		addAll(new ConnectionLine(start, end));
 	}
 }
