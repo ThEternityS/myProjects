@@ -1,4 +1,4 @@
-package org.entities;
+package org.entities.initiator;
 
 import org.main.EntityHolder;
 

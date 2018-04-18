@@ -42,6 +42,7 @@ public class EntityHolder {
 	}
 	
 	public boolean createSingleUnit(int x, int y, Affiliation affiliation, MovementBehaviour mb, ShootingBehaviour sb) {
+		
 		SingleUnit su = new SingleUnit(x, y, affiliation, mb, sb);
 		
 		//do nothing if the new unit collides with an old one

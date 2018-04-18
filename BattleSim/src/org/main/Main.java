@@ -2,8 +2,8 @@ package org.main;
 
 import javax.swing.JFrame;
 
-import org.entities.EffectInitiator;
-import org.entities.UnitInitiator;
+import org.entities.initiator.EffectInitiator;
+import org.entities.initiator.UnitInitiator;
 
 public class Main extends JFrame implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -54,6 +54,8 @@ public class Main extends JFrame implements Runnable {
 		
 		UnitInitiator ui = UnitInitiator.getInstance();
 		
+		
+		
 		ui.createEnemyStagnantUnit(400, 100);
 		ui.createEnemyStagnantUnit(495, 95);
 		ui.createEnemyStagnantUnit(483, 100);
@@ -64,7 +66,11 @@ public class Main extends JFrame implements Runnable {
 			ui.createAlliedIntelligentUnit(200 + 30 * i, 200);
 		}
 		
-		EffectInitiator.getInstance().createPingEffect(100, 100);
+		ui.createEnemyStagnantUnit(140, 400);
+		ui.createEnemyStagnantUnit(200, 400);
+		ui.createAlliedStagnantUnit(170, 400);
+		
+		//EffectInitiator.getInstance().createPingEffect(100, 100);
 	}
 	
 	private void update() {

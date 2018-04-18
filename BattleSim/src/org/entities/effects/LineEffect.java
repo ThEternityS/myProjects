@@ -7,8 +7,6 @@ import org.entities.Alive;
 
 public class LineEffect extends Effect implements Alive {
 
-	private boolean living = true;
-	
 	private int x1;
 	private int y1;
 	private int x2;
@@ -30,14 +28,10 @@ public class LineEffect extends Effect implements Alive {
 	}
 
 	/*
-	 *	Effect is alive for one cycle only 
+	 *	Effect is alive for one cycle only (creation cycle)
 	 */
 	@Override
 	public boolean isAlive() {
-		if(living) {
-			living = false;
-			return true;
-		}
 		return false;
 	}
 

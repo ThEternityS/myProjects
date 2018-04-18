@@ -1,4 +1,4 @@
-package org.entities;
+package org.entities.initiator;
 
 import org.entities.units.Affiliation;
 import org.entities.units.movement.MovementBehaviour;
@@ -17,7 +17,7 @@ public class UnitInitiator extends Initiator {
 	
 	public boolean createAlliedStagnantUnit(int x, int y) {
 		if(this.getHolder() == null) return false;
-		return this.getHolder().createSingleUnit(x, y, Affiliation.ALLY, MovementBehaviour.STAGNANT, ShootingBehaviour.PEACEFUL);
+		return this.getHolder().createSingleUnit(x, y, Affiliation.ALLY, MovementBehaviour.STAGNANT, ShootingBehaviour.LASER);
 	}
 	
 	public boolean createAlliedIntelligentUnit(int x, int y) {

@@ -1,6 +1,5 @@
 package org.entities.units;
 
-import org.entities.EffectInitiator;
 import org.entities.Updateable;
 import org.entities.units.movement.MovementBehaviour;
 import org.entities.units.movement.MovementModule;
@@ -41,6 +40,7 @@ public class SingleUnit extends Unit implements Updateable {
 		switch(shooting) {
 			case PEACEFUL:
 				myShooter = null;
+				break;
 			case LASER:
 				myShooter = new LaserShooter(this);
 		}
@@ -51,14 +51,6 @@ public class SingleUnit extends Unit implements Updateable {
 		
 		if(myMovements != null) {
 			myMovements.moveHost();
-			
-			/*
-			double ex = this.getX() + this.getRadius();
-			double ey = this.getY() + this.getRadius();
-			double ex2 = ex - myMovements.getVelocity().getX() * 10;
-			double ey2 = ey - myMovements.getVelocity().getY() * 10;
-			EffectInitiator.getInstance().createLineEffect(ex, ey, ex2, ey2);
-			*/
 		}
 		
 		if(myShooter != null) {
