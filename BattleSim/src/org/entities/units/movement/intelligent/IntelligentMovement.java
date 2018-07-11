@@ -71,6 +71,12 @@ public class IntelligentMovement implements MovementModule {
 	public void moveDown( ) {
 		force.addY(maxForce);
 	}
+	public void encircle(Collideable c) {
+		Vector2D f = vectorToHost(c);
+		f.rotate(60);
+		f.truncate(maxForce);
+		force.add(f);
+	}
 	
 	public void steeringInertia() {
 		Vector2D inertiaForce = new Vector2D(velocity);

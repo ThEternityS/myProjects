@@ -62,7 +62,7 @@ public class Main extends JFrame implements Runnable {
 		ui.createEnemyStagnantUnit(180, 200);
 		ui.createEnemyStagnantUnit(400, 180);
 		//create individual units
-		for(int i = 0; i < 7; ++i) {
+		for(int i = 0; i < 1; ++i) {
 			ui.createAlliedIntelligentUnit(200 + 30 * i, 200);
 		}
 		

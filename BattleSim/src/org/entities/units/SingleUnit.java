@@ -5,7 +5,7 @@ import org.entities.units.movement.MovementBehaviour;
 import org.entities.units.movement.MovementModule;
 import org.entities.units.movement.SlingMovement;
 import org.entities.units.movement.StraightMovement;
-import org.entities.units.movement.intelligent.AdvanceDropPrimer;
+import org.entities.units.movement.intelligent.EncirclePrimer;
 import org.entities.units.movement.intelligent.IntelligentMovement;
 import org.entities.units.shooting.LaserShooter;
 import org.entities.units.shooting.ShootingBehaviour;
@@ -34,7 +34,7 @@ public class SingleUnit extends Unit implements Updateable {
 				myMovements = new SlingMovement(this);
 				break;
 			case INTELLIGENT:
-				myMovements = new IntelligentMovement(this, new AdvanceDropPrimer());
+				myMovements = new IntelligentMovement(this, new EncirclePrimer(new CollisionScheme(100, 100, 0)));
 		}
 		
 		switch(shooting) {
